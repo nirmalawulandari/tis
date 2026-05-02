@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You 💖</title>
+    <!-- Mengambil font lucu dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Background warna pastel pink motif polkadot */
+            background-color: #ffe4e1;
+            background-image: radial-gradient(#ffb6c1 20%, transparent 20%), radial-gradient(#ffb6c1 20%, transparent 20%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            font-family: 'Nunito', sans-serif;
+            overflow: hidden; /* Mencegah layar bergeser (scroll) saat tombol lari */
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            backdrop-filter: blur(5px);
+            z-index: 10;
+            max-width: 90%;
+            width: 350px;
+        }
+
+        .gif {
+            width: 200px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #d81b60;
+            margin-top: 10px;
+            font-size: 26px;
+            line-height: 1.3;
+        }
+
+        p {
+            color: #ec407a;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            min-height: 50px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 900;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: 'Nunito', sans-serif;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #btn-yes {
+            background-color: #ff4081;
+            color: white;
+            z-index: 11; /* Memastikan tombol yes selalu bisa diklik */
+        }
+
+        #btn-yes:hover {
+            background-color: #f50057;
+            transform: scale(1.1);
+        }
+
+        #btn-no {
+            background-color: #f5f5f5;
+            color: #757575;
+            transition: left 0.1s ease, top 0.1s ease; /* Animasi mulus saat tombol lari */
+        }
+
+        /* Area untuk animasi hati yang melayang di background */
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Wadah Hati Melayang -->
+    <div class="floating-hearts" id="hearts-container"></div>
+
+    <!-- Kotak Utama -->
+    <div class="container" id="main-container">
+        <img src="https://media.tenor.com/efdzOpxZbp8AAAAi/tkthao219-bubududu.gif" alt="Cute Bear" class="gif" id="gif-image">
+        
+        <h1 id="title">Halo Iqbal, mau nggak jadi pacarku? 🥺👉👈</h1>
+        <p id="subtitle">Pilih jawabanmu di bawah ini ya!</p>
+        
+        <div class="btn-container" id="btn-container">
+            <button id="btn-yes" onclick="terima()">Mau! 💖</button>
+            <!-- Event onmouseover untuk PC/Laptop dan ontouchstart untuk HP -->
+            <button id="btn-no" onmouseover="kabur()" ontouchstart="kabur()">Nggak 😜</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. LOGIKA TOMBOL LARI ---
+        const btnNo = document.getElementById('btn-no');
+
+        function kabur() {
+            // Mengubah posisi tombol menjadi bebas di layar
+            btnNo.style.position = 'fixed';
+            
+            // Mengambil ukuran layar saat ini
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            // Mencegah tombol keluar dari layar
+            const maxLeft = windowWidth - btnNo.offsetWidth - 20;
+            const maxTop = windowHeight - btnNo.offsetHeight - 20;
+            
+            // Menghitung koordinat acak
+            const randomX = Math.max(20, Math.floor(Math.random() * maxLeft));
+            const randomY = Math.max(20, Math.floor(Math.random() * maxTop));
+            
+            // Memindahkan tombol
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+        }
+
+        // --- 2. LOGIKA KETIKA KLIK YES ---
+        function terima() {
+            // Mengubah teks judul dan subjudul
+            document.getElementById('title').innerText = "Yeayyy! Makasih yaa! 🥰💖";
+            document.getElementById('subtitle').innerText = "Hehehe I love you 100000x!";
+            
+            // Mengganti gambar GIF menjadi GIF berpelukan
+            document.getElementById('gif-image').src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+            
+            // Menyembunyikan kedua tombol
+            document.getElementById('btn-container').style.display = 'none';
+        }
+
+        // --- 3. ANIMASI HATI MELAYANG (BACKGROUND) ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💖';
+            heart.style.position = 'absolute';
+            // Muncul secara acak dari bawah layar
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            // Ukuran dan transparansi acak agar natural
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            heart.style.opacity = Math.random() * 0.4 + 0.2;
+            heart.style.transition = 'transform 4s linear, top 4s linear';
+            
+            document.getElementById('hearts-container').appendChild(heart);
+
+            // Pergerakan hati ke atas
+            setTimeout(() => {
+                heart.style.top = '-10vh';
+                heart.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+            }, 50);
+
+            // Menghapus elemen hati yang sudah keluar layar agar tidak berat
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        // Memunculkan hati baru setiap 400 milidetik
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
