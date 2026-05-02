@@ -71,7 +71,6 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.2s;
             font-family: 'Nunito', sans-serif;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
@@ -79,7 +78,8 @@
         #btn-yes {
             background-color: #ff4081;
             color: white;
-            z-index: 11; /* Memastikan tombol yes selalu bisa diklik */
+            z-index: 11;
+            transition: transform 0.2s;
         }
 
         #btn-yes:hover {
@@ -90,7 +90,9 @@
         #btn-no {
             background-color: #f5f5f5;
             color: #757575;
-            transition: left 0.1s ease, top 0.1s ease; /* Animasi mulus saat tombol lari */
+            /* Ini kuncinya! Efek transisi ini bikin tombolnya meluncur/kegeser mulus */
+            transition: transform 0.3s ease-out; 
+            z-index: 10;
         }
 
         /* Area untuk animasi hati yang melayang di background */
@@ -124,40 +126,37 @@
     </div>
 
     <script>
-        // --- 1. LOGIKA TOMBOL LARI ---
+        // --- 1. LOGIKA TOMBOL KEGESER ---
         const btnNo = document.getElementById('btn-no');
+        let currentX = 0;
+        let currentY = 0;
 
         function kabur() {
-            // Mengubah posisi tombol menjadi bebas di layar
-            btnNo.style.position = 'fixed';
-            
-            // Mengambil ukuran layar saat ini
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            
-            // Mencegah tombol keluar dari layar
-            const maxLeft = windowWidth - btnNo.offsetWidth - 20;
-            const maxTop = windowHeight - btnNo.offsetHeight - 20;
-            
-            // Menghitung koordinat acak
-            const randomX = Math.max(20, Math.floor(Math.random() * maxLeft));
-            const randomY = Math.max(20, Math.floor(Math.random() * maxTop));
-            
-            // Memindahkan tombol
-            btnNo.style.left = randomX + 'px';
-            btnNo.style.top = randomY + 'px';
+            // Menentukan seberapa jauh tombol bergeser tiap didekati (antara 70px - 150px)
+            let geserX = (Math.random() * 80 + 70); 
+            let geserY = (Math.random() * 80 + 70); 
+
+            // Mengacak arah geser (ke kiri/kanan atau atas/bawah)
+            currentX += (Math.random() > 0.5 ? geserX : -geserX);
+            currentY += (Math.random() > 0.5 ? geserY : -geserY);
+
+            // Supaya tombolnya nggak kegeser sampai hilang keluar dari layar HP/Laptop, 
+            // kita kasih batas maksimal pergeseran
+            if (currentX > 150 || currentX < -150) currentX = 0;
+            if (currentY > 150 || currentY < -150) currentY = 0;
+
+            // Memindahkan tombol menggunakan transform (yang ditenagai transition CSS di atas)
+            btnNo.style.transform = `translate(${currentX}px, ${currentY}px)`;
         }
 
         // --- 2. LOGIKA KETIKA KLIK YES ---
         function terima() {
-            // Mengubah teks judul dan subjudul
             document.getElementById('title').innerText = "Yeayyy! Makasih yaa! 🥰💖";
             document.getElementById('subtitle').innerText = "Hehehe I love you 100000x!";
             
-            // Mengganti gambar GIF menjadi GIF berpelukan
             document.getElementById('gif-image').src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
             
-            // Menyembunyikan kedua tombol
+            // Menyembunyikan kedua tombol setelah jawaban Yes diklik
             document.getElementById('btn-container').style.display = 'none';
         }
 
@@ -166,29 +165,26 @@
             const heart = document.createElement('div');
             heart.innerHTML = '💖';
             heart.style.position = 'absolute';
-            // Muncul secara acak dari bawah layar
+            
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.top = '100vh';
-            // Ukuran dan transparansi acak agar natural
+            
             heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
             heart.style.opacity = Math.random() * 0.4 + 0.2;
             heart.style.transition = 'transform 4s linear, top 4s linear';
             
             document.getElementById('hearts-container').appendChild(heart);
 
-            // Pergerakan hati ke atas
             setTimeout(() => {
                 heart.style.top = '-10vh';
                 heart.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
             }, 50);
 
-            // Menghapus elemen hati yang sudah keluar layar agar tidak berat
             setTimeout(() => {
                 heart.remove();
             }, 4000);
         }
 
-        // Memunculkan hati baru setiap 400 milidetik
         setInterval(createHeart, 400);
     </script>
 </body>
