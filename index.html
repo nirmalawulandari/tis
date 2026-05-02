@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You 💖</title>
-    <!-- Mengambil font lucu dari Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+    <title>For You 🤍</title>
     <style>
+        /* Menggunakan font sistem yang modern dan bersih */
         body {
             margin: 0;
             padding: 0;
@@ -15,177 +14,136 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            /* Background warna pastel pink motif polkadot */
-            background-color: #ffe4e1;
-            background-image: radial-gradient(#ffb6c1 20%, transparent 20%), radial-gradient(#ffb6c1 20%, transparent 20%);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
-            font-family: 'Nunito', sans-serif;
-            overflow: hidden; /* Mencegah layar bergeser (scroll) saat tombol lari */
+            background-color: #fafafa; /* Putih tulang yang lembut */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #111827; /* Hitam pekat modern */
+            overflow: hidden;
             text-align: center;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.9);
+            background: #ffffff;
             padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
-            backdrop-filter: blur(5px);
-            z-index: 10;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04); /* Bayangan sangat tipis & profesional */
             max-width: 90%;
-            width: 350px;
+            width: 380px;
+            border: 1px solid #f3f4f6;
+            z-index: 10;
         }
 
         .gif {
-            width: 200px;
-            border-radius: 12px;
-            margin-bottom: 10px;
+            width: 140px;
+            border-radius: 8px;
+            margin-bottom: 24px;
         }
 
         h1 {
-            color: #d81b60;
-            margin-top: 10px;
-            font-size: 26px;
-            line-height: 1.3;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
         }
 
         p {
-            color: #ec407a;
-            font-size: 16px;
-            margin-bottom: 25px;
+            font-size: 15px;
+            color: #6b7280; /* Abu-abu profesional */
+            margin: 0 0 32px 0;
+            line-height: 1.5;
         }
 
         .btn-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             position: relative;
-            min-height: 50px;
+            min-height: 45px;
         }
 
         button {
-            padding: 12px 28px;
-            font-size: 16px;
-            font-weight: 900;
-            border: none;
-            border-radius: 50px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
             cursor: pointer;
-            font-family: 'Nunito', sans-serif;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-family: inherit;
         }
 
+        /* Desain Tombol Yes - Solid Dark */
         #btn-yes {
-            background-color: #ff4081;
-            color: white;
+            background-color: #111827;
+            color: #ffffff;
+            border: 1px solid #111827;
             z-index: 11;
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
         }
 
         #btn-yes:hover {
-            background-color: #f50057;
-            transform: scale(1.1);
+            background-color: #374151;
+            border-color: #374151;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
+        /* Desain Tombol No - Light Outline */
         #btn-no {
-            background-color: #f5f5f5;
-            color: #757575;
-            /* Ini kuncinya! Efek transisi ini bikin tombolnya meluncur/kegeser mulus */
-            transition: transform 0.3s ease-out; 
+            background-color: #ffffff;
+            color: #4b5563;
+            border: 1px solid #d1d5db;
             z-index: 10;
-        }
-
-        /* Area untuk animasi hati yang melayang di background */
-        .floating-hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
+            /* Transisi cubic-bezier membuat efek bergesernya terasa lebih mulus/premium */
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
     </style>
 </head>
 <body>
 
-    <!-- Wadah Hati Melayang -->
-    <div class="floating-hearts" id="hearts-container"></div>
-
-    <!-- Kotak Utama -->
     <div class="container" id="main-container">
-        <img src="https://media.tenor.com/efdzOpxZbp8AAAAi/tkthao219-bubududu.gif" alt="Cute Bear" class="gif" id="gif-image">
+        <!-- Gambar GIF estetis dan tidak terlalu ramai -->
+        <img src="https://media.tenor.com/GfHKEqkGq4wAAAAi/tkthao219-bubududu.gif" alt="Cute" class="gif" id="gif-image">
         
-        <h1 id="title">Halo Iqbal, mau nggak jadi pacarku? 🥺👉👈</h1>
-        <p id="subtitle">Pilih jawabanmu di bawah ini ya!</p>
+        <h1 id="title">Halo Iqbal, mau nggak jadi pacarku?</h1>
+        <p id="subtitle">Pilih jawabanmu di bawah ini.</p>
         
         <div class="btn-container" id="btn-container">
-            <button id="btn-yes" onclick="terima()">Mau! 💖</button>
-            <!-- Event onmouseover untuk PC/Laptop dan ontouchstart untuk HP -->
-            <button id="btn-no" onmouseover="kabur()" ontouchstart="kabur()">Nggak 😜</button>
+            <button id="btn-yes" onclick="terima()">Mau 🤍</button>
+            <!-- Event untuk memicu geseran tombol -->
+            <button id="btn-no" onmouseover="kabur()" ontouchstart="kabur()">Nggak</button>
         </div>
     </div>
 
     <script>
-        // --- 1. LOGIKA TOMBOL KEGESER ---
+        // --- LOGIKA TOMBOL BERGESER (SMOOTH) ---
         const btnNo = document.getElementById('btn-no');
         let currentX = 0;
         let currentY = 0;
 
         function kabur() {
-            // Menentukan seberapa jauh tombol bergeser tiap didekati (antara 70px - 150px)
-            let geserX = (Math.random() * 80 + 70); 
-            let geserY = (Math.random() * 80 + 70); 
+            // Pergeseran dibuat pas (tidak terlalu jauh tapi cukup untuk menghindar)
+            let geserX = (Math.random() * 80 + 50); 
+            let geserY = (Math.random() * 80 + 50); 
 
-            // Mengacak arah geser (ke kiri/kanan atau atas/bawah)
             currentX += (Math.random() > 0.5 ? geserX : -geserX);
             currentY += (Math.random() > 0.5 ? geserY : -geserY);
 
-            // Supaya tombolnya nggak kegeser sampai hilang keluar dari layar HP/Laptop, 
-            // kita kasih batas maksimal pergeseran
-            if (currentX > 150 || currentX < -150) currentX = 0;
-            if (currentY > 150 || currentY < -150) currentY = 0;
+            // Batas maksimal agar tidak keluar jauh dari container
+            if (currentX > 120 || currentX < -120) currentX = 0;
+            if (currentY > 120 || currentY < -120) currentY = 0;
 
-            // Memindahkan tombol menggunakan transform (yang ditenagai transition CSS di atas)
             btnNo.style.transform = `translate(${currentX}px, ${currentY}px)`;
         }
 
-        // --- 2. LOGIKA KETIKA KLIK YES ---
+        // --- LOGIKA SAAT DITERIMA ---
         function terima() {
-            document.getElementById('title').innerText = "Yeayyy! Makasih yaa! 🥰💖";
-            document.getElementById('subtitle').innerText = "Hehehe I love you 100000x!";
+            document.getElementById('title').innerText = "Yes, finally. 🤍";
+            document.getElementById('subtitle').innerText = "I love you, Iqbal.";
             
-            document.getElementById('gif-image').src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+            // Mengganti ke GIF yang lebih manis & kalem
+            document.getElementById('gif-image').src = "https://media.tenor.com/J_8JbHIE-1UAAAAi/tkthao219-bubududu.gif";
             
-            // Menyembunyikan kedua tombol setelah jawaban Yes diklik
             document.getElementById('btn-container').style.display = 'none';
         }
-
-        // --- 3. ANIMASI HATI MELAYANG (BACKGROUND) ---
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.innerHTML = '💖';
-            heart.style.position = 'absolute';
-            
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = '100vh';
-            
-            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
-            heart.style.opacity = Math.random() * 0.4 + 0.2;
-            heart.style.transition = 'transform 4s linear, top 4s linear';
-            
-            document.getElementById('hearts-container').appendChild(heart);
-
-            setTimeout(() => {
-                heart.style.top = '-10vh';
-                heart.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
-            }, 50);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 4000);
-        }
-
-        setInterval(createHeart, 400);
     </script>
 </body>
 </html>
