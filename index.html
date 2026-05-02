@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For You 🩷</title>
     <style>
-        /* Menggunakan font sistem modern dipadu dengan warna background pink sangat muda (Blush) */
         body {
             margin: 0;
             padding: 0;
@@ -14,7 +13,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #fdf2f8; 
+            /* Background gradasi pink yang elegan */
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow: hidden;
             text-align: center;
@@ -23,32 +23,54 @@
         .container {
             background: #ffffff;
             padding: 40px 30px;
-            border-radius: 16px;
-            /* Shadow dengan sentuhan warna pink transparan */
-            box-shadow: 0 8px 30px rgba(219, 39, 119, 0.08); 
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(219, 39, 119, 0.12);
             max-width: 90%;
             width: 380px;
-            border: 1px solid #fce7f3;
+            border: 1px solid #fbcfe8;
+            /* Garis aksen tebal di atas kotak */
+            border-top: 6px solid #db2777; 
             z-index: 10;
+            position: relative;
+        }
+
+        /* Tulisan kecil pemanis di atas GIF */
+        .eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #f472b6;
+            text-transform: uppercase;
+            margin: 0 0 20px 0;
         }
 
         .gif {
-            width: 140px;
-            border-radius: 8px;
-            margin-bottom: 24px;
+            width: 150px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            /* Bayangan pada GIF agar lebih berdimensi */
+            box-shadow: 0 6px 16px rgba(219, 39, 119, 0.15);
         }
 
         h1 {
             font-size: 22px;
-            font-weight: 600;
-            margin: 0 0 8px 0;
-            letter-spacing: -0.5px;
-            color: #9d174d; /* Pink pekat / Burgundy modern */
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            color: #9d174d;
         }
 
-        p {
+        /* Garis pemisah manis di bawah judul */
+        .divider {
+            width: 40px;
+            height: 3px;
+            background-color: #fbcfe8;
+            margin: 0 auto 15px auto;
+            border-radius: 3px;
+        }
+
+        p.message {
             font-size: 15px;
-            color: #be185d; /* Pink medium untuk subtitle */
+            color: #be185d;
             margin: 0 0 32px 0;
             line-height: 1.5;
         }
@@ -57,43 +79,39 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             position: relative;
             min-height: 45px;
         }
 
         button {
-            padding: 10px 24px;
+            padding: 12px 28px;
             font-size: 14px;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-family: inherit;
         }
 
-        /* Desain Tombol Yes - Solid Pink Elegant */
         #btn-yes {
             background-color: #db2777;
             color: #ffffff;
-            border: 1px solid #db2777;
+            border: none;
             z-index: 11;
             transition: all 0.2s ease;
         }
 
         #btn-yes:hover {
             background-color: #be185d;
-            border-color: #be185d;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(219, 39, 119, 0.25);
+            box-shadow: 0 6px 15px rgba(219, 39, 119, 0.3);
         }
 
-        /* Desain Tombol No - Light Pink Outline */
         #btn-no {
             background-color: #ffffff;
             color: #db2777;
-            border: 1px solid #fbcfe8;
+            border: 2px solid #fbcfe8;
             z-index: 10;
-            /* Efek meluncur/bergeser yang sangat mulus */
             transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
     </style>
@@ -101,11 +119,13 @@
 <body>
 
     <div class="container" id="main-container">
-        <!-- Gambar GIF estetis -->
+        <div class="eyebrow">A Special Message</div>
+        
         <img src="https://media.tenor.com/GfHKEqkGq4wAAAAi/tkthao219-bubududu.gif" alt="Cute" class="gif" id="gif-image">
         
         <h1 id="title">Halo Iqbal, mau nggak jadi pacarku?</h1>
-        <p id="subtitle">Pilih jawabanmu di bawah ini.</p>
+        <div class="divider" id="divider"></div>
+        <p class="message" id="subtitle">Pilih jawabanmu di bawah ini.</p>
         
         <div class="btn-container" id="btn-container">
             <button id="btn-yes" onclick="terima()">Mau 🩷</button>
@@ -114,7 +134,7 @@
     </div>
 
     <script>
-        // --- LOGIKA TOMBOL BERGESER (SMOOTH) ---
+        // --- LOGIKA TOMBOL BERGESER ---
         const btnNo = document.getElementById('btn-no');
         let currentX = 0;
         let currentY = 0;
@@ -137,9 +157,12 @@
             document.getElementById('title').innerText = "Yes, finally. 🩷";
             document.getElementById('subtitle').innerText = "I love you, Iqbal.";
             
+            // Mengganti ke GIF yang manis
             document.getElementById('gif-image').src = "https://media.tenor.com/J_8JbHIE-1UAAAAi/tkthao219-bubududu.gif";
             
+            // Menyembunyikan tombol dan garis pembatas
             document.getElementById('btn-container').style.display = 'none';
+            document.getElementById('divider').style.display = 'none';
         }
     </script>
 </body>
